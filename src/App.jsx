@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import UserList from "./components/UserList";
+import Dashboard from "./pages/Dashboard";
+import Settings from "./pages/Settings";
+import OtherPage from "./pages/OtherPage";
+import { useEffect, useState } from "react";
+import { getUsers } from "./api";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const fetchedUsers = await getUsers();
+      setUsers(fetchedUsers);
+    };
+
+    fetchUsers();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <ChakraProvider>
+      <Router>
+        <Navbar />
+        <Flex>
+          <Sidebar />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/users" element={<UserList users={users} />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/other" element={<OtherPage />} />
+          </Routes>
+        </Flex>
+      </Router>
+    </ChakraProvider>
+  );
+};
 
-export default App
+export default App;
