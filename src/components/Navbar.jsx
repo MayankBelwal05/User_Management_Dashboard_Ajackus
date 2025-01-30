@@ -5,7 +5,6 @@ const Navbar = () => {
   return (
     <Box bg="#235fe7" px={4} py={2} color="white">
       <Flex align="center" justify="center">
-        {/* Logo aligned to the left */}
         <Box flex="0 0 auto">
           <Image 
             src={ajackusLogo} 
@@ -15,8 +14,7 @@ const Navbar = () => {
             borderRadius="8px"
           />
         </Box>
-
-        {/* Centered Text */}
+        
         <Text 
           fontSize="32px"
           fontWeight="bold" 

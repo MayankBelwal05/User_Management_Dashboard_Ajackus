@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const apiURL = ``;
+export const apiURL = `https://dbusersdata-json.onrender.com/users`;
 
 export const getUsers = async () => {
   try {

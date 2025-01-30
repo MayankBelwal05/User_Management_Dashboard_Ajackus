@@ -58,8 +58,8 @@ const UserList = () => {
   };
 
   return (
-    <Box width="100%" height="100vh" padding="20px" overflow="auto">
-      <Box display="flex" justifyContent="center" mb={4}>
+    <Box width="100%" height="100vh" padding="10px" overflow="auto" >
+      <Box display="flex" justifyContent="center" mb={4} padding ="10px">
         <Box display="flex" alignItems="center">
           <Input
             placeholder="Search using name or email"
@@ -97,7 +97,7 @@ const UserList = () => {
         </Button>
       </Box>
 
-      <Table variant="striped" color="black" border="1px solid" borderColor="gray.200">
+      <Table variant="striped" color="black" border="1px solid" borderColor="gray.200" >
         <Thead backgroundColor="blue.200">
           <Tr >
             <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">S.No</Th>
