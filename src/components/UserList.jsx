@@ -66,7 +66,7 @@ const UserList = () => {
 
   return (
     <Box width="100%" height="100vh" padding="10px" overflow="auto">
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={4} padding="10px">
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2} padding="10px">
         <Box display="flex" alignItems="center">
    
           <Box display={{ base: 'none', md: 'block' }} mr={4}>
@@ -74,16 +74,18 @@ const UserList = () => {
               placeholder="🔍 Search using name or email"
               value={searchQuery}
               onChange={handleSearchChange}
-              width="270px"
+              width="250px"
+              fontSize="14px"
             />
           </Box>
 
-          <Box display={{ base: 'none', md: 'block' }} mr={4}>
+          <Box display={{ base: 'none', md: 'block' }}>
             <Select
-              placeholder="⏳ Filter by Department"
+              placeholder= "⏳ Filter by Department"
               value={selectedDepartment}
               onChange={handleFilterChange}
               width="210px"
+              fontSize="14px"
             >
               <option value="Sales">Sales</option>
               <option value="IT">IT</option>
@@ -132,6 +134,7 @@ const UserList = () => {
                 onChange={handleFilterChange}
                 width="200px"
                 mb={2}
+                fontSize="14px"
               >
                 <option value="Sales">Sales</option>
                 <option value="IT">IT</option>
@@ -152,7 +155,7 @@ const UserList = () => {
           </Box>
         </Box>
 
-        <Button colorScheme="blue" onClick={() => openModal(null)} mb={2}>
+        <Button colorScheme="blue" onClick={() => openModal(null)}>
           ✙ Add User
         </Button>
       </Box>
@@ -160,16 +163,16 @@ const UserList = () => {
       <Table variant="striped" color="black" border="1px solid" borderColor="gray.200">
         <Thead backgroundColor="blue.200">
           <Tr>
-            <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">S.No</Th>
-            <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">Avatar</Th>
-            <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">First Name</Th>
-            <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">Last Name</Th>
-            <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">Email</Th>
-            <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">Department</Th>
-            <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">Actions</Th>
+            <Th color="black" textAlign="center" fontWeight="bold" fontSize="14px">S.No</Th>
+            <Th color="black" textAlign="center" fontWeight="bold" fontSize="14px">Avatar</Th>
+            <Th color="black" textAlign="center" fontWeight="bold" fontSize="14px">First Name</Th>
+            <Th color="black" textAlign="center" fontWeight="bold" fontSize="14px">Last Name</Th>
+            <Th color="black" textAlign="center" fontWeight="bold" fontSize="14px">Email</Th>
+            <Th color="black" textAlign="center" fontWeight="bold" fontSize="14px">Department</Th>
+            <Th color="black" textAlign="center" fontWeight="bold" fontSize="14px">Actions</Th>
           </Tr>
         </Thead>
-        <Tbody>
+        <Tbody fontSize="14px" >
           {isLoading ? (
             [...Array(usersPerPage)].map((_, index) => (
               <Tr key={index} height="40px" borderBottom="1px solid" borderColor="gray.200">
@@ -219,7 +222,7 @@ const UserList = () => {
 
       {/* Pagination */}
       <Box display="flex" justifyContent="center" mt={4}>
-        <Button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} mr={2}>
+        <Button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} mr={2} fontSize="14px">
           Previous
         </Button>
         {[...Array(totalPages).keys()].map((page) => (
@@ -228,11 +231,12 @@ const UserList = () => {
             onClick={() => handlePageChange(page + 1)}
             colorScheme={currentPage === page + 1 ? "blue" : "gray"}
             mx={1}
+            fontSize="14px"
           >
             {page + 1}
           </Button>
         ))}
-        <Button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} ml={2}>
+        <Button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} ml={2} fontSize="14px">
           Next
         </Button>
       </Box>

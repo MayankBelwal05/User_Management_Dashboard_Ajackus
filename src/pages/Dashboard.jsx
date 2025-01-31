@@ -17,12 +17,12 @@ const Dashboard = () => {
         textAlign="center"
         maxWidth="2xl"
         w="100%"  
-        px={4}  
+        px={2}  
       >
-        <Text fontSize="5xl" fontWeight="bold" color="gray.900" mb={8}>
+        <Text fontSize="36px" fontWeight="bold" color="gray.900" mb={8}>
           Welcome to the User Management Dashboard
         </Text>
-        <Text fontSize="lg" color="gray.700" mb={8}>
+        <Text fontSize="18px" color="gray.700" mb={8}>
           Manage your users effectively, stay organized, and optimize your workflow.
         </Text>
         <Flex justify="center" gap={6}>
@@ -32,7 +32,7 @@ const Dashboard = () => {
               color="white"
               px={6}
               py={3}
-              fontSize="lg"
+              fontSize="14px"
               fontWeight="bold"
               _hover={{ bg: "blue.400" }}
             >

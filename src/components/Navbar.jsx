@@ -16,14 +16,14 @@ const Navbar = () => {
           <Image 
             src={ajackusLogo} 
             alt="Ajackus Logo" 
-            height="55px" 
-            width="150px" 
+            height="50px" 
+            width="130px" 
             borderRadius="8px"
           />
         </Box>
         
         <Text 
-          fontSize={isMobile ? "20px" : "32px"}  
+          fontSize={isMobile ? "20px" : "28px"}  
           fontWeight="bold" 
           textAlign={isMobile ? "center" : "center"} 
           flex="1"
