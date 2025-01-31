@@ -5,7 +5,7 @@ The **User Management Dashboard** is a comprehensive platform designed for manag
 
 ## Technology Stack
 - **Frontend**: React, Chakra UI, Axios
-- **User Data**:  JSONPlaceholder
+- **User Data**:  JSONPlaceholder API
 
 ## Deployed App
 - **Frontend**: [User Management Dashboard (Live Link)](https://ajackus-user-management-dashboard-gamma.vercel.app/)
@@ -19,12 +19,20 @@ The **User Management Dashboard** is a comprehensive platform designed for manag
 - **Responsive Design**: Optimized for various devices, including desktops and mobiles.
 
 ## Design
-
 ### --Dashboard
+
+![Dashboard - Home](https://github.com/user-attachments/assets/e027a6d7-417b-4b89-a6ec-f1db0586104e)
+
 
 ### --User List
 
+![UsersList](https://github.com/user-attachments/assets/fbd3bb65-0b2f-404c-8ec9-76af483c7866)
+
+
 ### --Add User Form
+
+![Add user form](https://github.com/user-attachments/assets/301bdad0-7ad6-433e-80a2-1caff2d200e6)
+
 
 ## Video Walkthrough of the project
 
@@ -71,4 +79,4 @@ User_Management_Dashboard_Ajackus/
 - Clean and minimalist design for enhanced user experience.
 - Utilization of React Chakra UI for dynamic and interactive user interface.
 
-## Ajackus-User Management Dashboard! 📅🚀
+### Thank You for Visting ## Ajackus-User Management Dashboard! Assignment 📅🚀
