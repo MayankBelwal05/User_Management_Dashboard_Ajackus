@@ -36,6 +36,7 @@ The **User Management Dashboard** is a comprehensive platform designed for manag
 
 ## Video Walkthrough of the project
 
+https://github.com/user-attachments/assets/39c2521f-0d52-4c98-8e38-57b6d8d02613
 
 ## Directory Structure
 ```
