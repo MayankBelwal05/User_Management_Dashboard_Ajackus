@@ -190,7 +190,7 @@ const UserList = () => {
               <Tr key={user.id} height="40px" borderBottom="1px solid" borderColor="gray.200">
                 <Td height="10px" textAlign="center">{indexOfFirstUser + index + 1}</Td>
                 <Td textAlign="center">
-                  <Avatar name={`${user.firstName} ${user.lastName}`} size="sm" />
+                  <Avatar name={`${user.firstName}`} size="sm" />
                 </Td>
                 <Td textAlign="center">{user.firstName}</Td>
                 <Td textAlign="center">{user.lastName}</Td>
