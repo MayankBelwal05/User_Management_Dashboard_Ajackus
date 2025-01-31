@@ -36,7 +36,7 @@ const Dashboard = () => {
               fontWeight="bold"
               _hover={{ bg: "blue.400" }}
             >
-             Explore Users List
+             Explore Users List ➜
             </Button>
           </Link>
         </Flex>
