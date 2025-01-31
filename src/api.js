@@ -5,7 +5,6 @@ export const apiURL = `https://dbusersdata-json.onrender.com/users`;
 export const getUsers = async () => {
   try {
     const response = await axios.get(apiURL);
-    console.log(response.data)
     return response.data || [];
   } catch (error) {
     console.error("Error Fetching Users:", error);

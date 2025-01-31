@@ -44,7 +44,7 @@ const UserModal = ({ user, isOpen, onClose, onUserUpdate }) => {
   
     toast({
         title: userData.id ? 'User updated.' : 'User added.',
-        description: userData.id ? 'The user has been successfully updated.' : 'The user has been successfully added.',
+        description: userData.id ? 'Updated Successfully .' : 'User added successfully .',
         status: 'success',
         duration: 3000,
         isClosable: true,

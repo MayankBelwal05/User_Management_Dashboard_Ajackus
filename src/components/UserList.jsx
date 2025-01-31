@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Button, Input, Select, Box, Table, Thead, Tbody, Tr, Th, Td, IconButton, Avatar } from '@chakra-ui/react';
+import { Button, Input, Select, Box, Table, Thead, Tbody, Tr, Th, Td, IconButton, Avatar, Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
 import { FaSearch, FaFilter, FaEdit, FaTrash } from 'react-icons/fa'; 
+import { MdClose } from 'react-icons/md';
 import UserModal from './UserModal';
 import { getUsers, deleteUser } from '../api';
 
@@ -12,11 +13,17 @@ const UserList = () => {
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     const fetchUsers = async () => {
       const data = await getUsers();
-      setUsers(data);
+      setTimeout(() => {
+        setUsers(data);
+        setIsLoading(false); 
+      }, 1000); 
     };
     fetchUsers();
   }, []);
@@ -58,48 +65,101 @@ const UserList = () => {
   };
 
   return (
-    <Box width="100%" height="100vh" padding="10px" overflow="auto" >
-      <Box display="flex" justifyContent="center" mb={4} padding ="10px">
+    <Box width="100%" height="100vh" padding="10px" overflow="auto">
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={4} padding="10px">
         <Box display="flex" alignItems="center">
-          <Input
-            placeholder="Search using name or email"
-            value={searchQuery}
-            onChange={handleSearchChange}
-            width="300px"
-            mr={4}
-          />
-          <IconButton icon={<FaSearch />} aria-label="Search" mr={4} />
-          <Select
-            placeholder="Filter by Department"
-            value={selectedDepartment}
-            onChange={handleFilterChange}
-            width="200px"
-          >
-            <option value="Sales">Sales</option>
-            <option value="IT">IT</option>
-            <option value="Finance">Finance</option>
-            <option value="Customer Support">Customer Support</option>
-            <option value="Legal">Legal</option>
-            <option value="Administration">Administration</option>
-            <option value="R&D">R&D</option>
-            <option value="Logistics">Logistics</option>
-            <option value="Production">Production</option>
-            <option value="Design">Design</option>
-            <option value="Quality Assurance">Quality Assurance</option>
-            <option value="Engineering">Engineering</option>
-            <option value="HR">HR</option>
-            <option value="None">None</option>
-          </Select>
-          <IconButton icon={<FaFilter />} aria-label="Filter" ml={4} />
+   
+          <Box display={{ base: 'none', md: 'block' }} mr={4}>
+            <Input
+              placeholder="🔍 Search using name or email"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              width="270px"
+            />
+          </Box>
+
+          <Box display={{ base: 'none', md: 'block' }} mr={4}>
+            <Select
+              placeholder="⏳ Filter by Department"
+              value={selectedDepartment}
+              onChange={handleFilterChange}
+              width="210px"
+            >
+              <option value="Sales">Sales</option>
+              <option value="IT">IT</option>
+              <option value="Finance">Finance</option>
+              <option value="Customer Support">Customer Support</option>
+              <option value="Legal">Legal</option>
+              <option value="Administration">Administration</option>
+              <option value="R&D">R&D</option>
+              <option value="Logistics">Logistics</option>
+              <option value="Production">Production</option>
+              <option value="Design">Design</option>
+              <option value="Quality Assurance">Quality Assurance</option>
+              <option value="Engineering">Engineering</option>
+              <option value="HR">HR</option>
+              <option value="None">None</option>
+            </Select>
+          </Box>
+
+
+          <Box display={{ base: 'block', md: 'none' }} mr={4}>
+            <IconButton
+              icon={isSearchVisible ? <MdClose /> : <FaSearch />}
+              aria-label="Search"
+              onClick={() => setIsSearchVisible(!isSearchVisible)}
+              mr={2}
+            />
+            {isSearchVisible && (
+              <Input
+                placeholder="Search using name or email"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                width="200px"
+                mb={2}
+              />
+            )}
+
+            <IconButton
+              icon={isFilterVisible ? <MdClose /> : <FaFilter />}
+              aria-label="Filter"
+              onClick={() => setIsFilterVisible(!isFilterVisible)}
+            />
+            {isFilterVisible && (
+              <Select
+                placeholder="Filter by Department"
+                value={selectedDepartment}
+                onChange={handleFilterChange}
+                width="200px"
+                mb={2}
+              >
+                <option value="Sales">Sales</option>
+                <option value="IT">IT</option>
+                <option value="Finance">Finance</option>
+                <option value="Customer Support">Customer Support</option>
+                <option value="Legal">Legal</option>
+                <option value="Administration">Administration</option>
+                <option value="R&D">R&D</option>
+                <option value="Logistics">Logistics</option>
+                <option value="Production">Production</option>
+                <option value="Design">Design</option>
+                <option value="Quality Assurance">Quality Assurance</option>
+                <option value="Engineering">Engineering</option>
+                <option value="HR">HR</option>
+                <option value="None">None</option>
+              </Select>
+            )}
+          </Box>
         </Box>
-        <Button ml= "100px" colorScheme="blue" onClick={() => openModal(null)}>
-        ✙ Add User
+
+        <Button colorScheme="blue" onClick={() => openModal(null)} mb={2}>
+          ✙ Add User
         </Button>
       </Box>
 
-      <Table variant="striped" color="black" border="1px solid" borderColor="gray.200" >
+      <Table variant="striped" color="black" border="1px solid" borderColor="gray.200">
         <Thead backgroundColor="blue.200">
-          <Tr >
+          <Tr>
             <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">S.No</Th>
             <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">Avatar</Th>
             <Th color="black" textAlign="center" fontWeight="bold" fontSize="16px">First Name</Th>
@@ -110,37 +170,54 @@ const UserList = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {currentUsers.map((user, index) => (
-            <Tr key={user.id} height="40px" borderBottom="1px solid" borderColor="gray.200">
-              <Td height="10px" textAlign="center">{indexOfFirstUser + index + 1}</Td>
-              <Td textAlign="center">
-                <Avatar name={`${user.firstName} ${user.lastName}`} size="sm" />
-              </Td>
-              <Td textAlign="center">{user.firstName}</Td>
-              <Td textAlign="center">{user.lastName}</Td>
-              <Td textAlign="center">{user.email}</Td>
-              <Td textAlign="center">{user.department}</Td>
-              <Td textAlign="center">
-                <IconButton
-                  colorScheme="blue"
-                  aria-label="Edit"
-                  icon={<FaEdit />}
-                  onClick={() => openModal(user)}
-                />
-                <IconButton
-                  colorScheme="red"
-                  aria-label="Delete"
-                  icon={<FaTrash />}
-                  onClick={() => handleDeleteUser(user.id)}
-                  ml={4}
-                />
-              </Td>
-            </Tr>
-          ))}
+          {isLoading ? (
+            [...Array(usersPerPage)].map((_, index) => (
+              <Tr key={index} height="40px" borderBottom="1px solid" borderColor="gray.200">
+                <Td height="10px" textAlign="center"><Skeleton height="20px" /></Td>
+                <Td textAlign="center"><SkeletonCircle size="10" /></Td>
+                <Td textAlign="center"><SkeletonText noOfLines={1} spacing="4" /></Td>
+                <Td textAlign="center"><SkeletonText noOfLines={1} spacing="4" /></Td>
+                <Td textAlign="center"><SkeletonText noOfLines={1} spacing="4" /></Td>
+                <Td textAlign="center"><SkeletonText noOfLines={1} spacing="4" /></Td>
+                <Td textAlign="center">
+                  <Skeleton height="20px" width="20px" />
+                  <Skeleton height="20px" width="20px" ml={4} />
+                </Td>
+              </Tr>
+            ))
+          ) : (
+            currentUsers.map((user, index) => (
+              <Tr key={user.id} height="40px" borderBottom="1px solid" borderColor="gray.200">
+                <Td height="10px" textAlign="center">{indexOfFirstUser + index + 1}</Td>
+                <Td textAlign="center">
+                  <Avatar name={`${user.firstName} ${user.lastName}`} size="sm" />
+                </Td>
+                <Td textAlign="center">{user.firstName}</Td>
+                <Td textAlign="center">{user.lastName}</Td>
+                <Td textAlign="center">{user.email}</Td>
+                <Td textAlign="center">{user.department}</Td>
+                <Td textAlign="center">
+                  <IconButton
+                    colorScheme="blue"
+                    aria-label="Edit"
+                    icon={<FaEdit />}
+                    onClick={() => openModal(user)}
+                  />
+                  <IconButton
+                    colorScheme="red"
+                    aria-label="Delete"
+                    icon={<FaTrash />}
+                    onClick={() => handleDeleteUser(user.id)}
+                    ml={4}
+                  />
+                </Td>
+              </Tr>
+            ))
+          )}
         </Tbody>
       </Table>
 
-      {/* Pagination Controls */}
+      {/* Pagination */}
       <Box display="flex" justifyContent="center" mt={4}>
         <Button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} mr={2}>
           Previous
